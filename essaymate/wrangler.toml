@@ -1,0 +1,32 @@
+# wrangler.toml
+# Cloudflare Workers 배포 설정 파일
+
+name = "essaymate-api"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# ─── 환경 변수 ───────────────────────────────────────────────
+# ANTHROPIC_API_KEY는 절대 여기 직접 입력하지 말 것!
+# 반드시 아래 명령어로 등록:
+#   wrangler secret put ANTHROPIC_API_KEY
+
+# ─── 로컬 개발 서버 ──────────────────────────────────────────
+[dev]
+port = 8787
+local_protocol = "http"
+
+# ─── 프로덕션 환경 ───────────────────────────────────────────
+[env.production]
+name = "essaymate-api-prod"
+
+# CORS 허용 도메인 (배포 후 실제 도메인으로 변경 필요)
+# worker.js 의 CORS_HEADERS "Access-Control-Allow-Origin" 도 함께 수정할 것
+# 예: "https://essaymate.pages.dev" 또는 커스텀 도메인
+
+# ─── 라우팅 ──────────────────────────────────────────────────
+# Cloudflare Pages와 연동 시 Pages Functions 대신
+# 독립 Worker로 배포하고 아래처럼 라우트 설정
+# [[routes]]
+# pattern = "essaymate.com/api/*"
+# zone_name = "essaymate.com"
