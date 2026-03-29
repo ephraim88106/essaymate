@@ -41,9 +41,14 @@ Create separate pages for:
 - **Texture & Effects:** Maintain the subtle noise texture and deep shadows for a premium feel.
 - **Accessibility:** Verify color contrast and ARIA labels for all interactive elements.
 
+### **6. Monetization with Coupa Partners**
+- **Coupa Partners Banner:** Add a vertical banner (120x240) to the landing page, generator page, and result page.
+- **Disclosure Statement:** Include the mandatory disclosure: "이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다."
+
 ## **Execution Steps**
 1. **Refactor:** Move CSS/JS to external files and update `index.html` links.
 2. **Expansion:** Create `about.html`, `contact.html`, `privacy.html`, and `terms.html`.
 3. **Content Update:** Add the "Guides" and "FAQ" sections to the landing page or a new page.
 4. **Footer/Header Update:** Update navigation links across all pages.
 5. **SEO & Validation:** Add meta tags and perform a final check for errors.
+6. **Monetization:** Integrate Coupa Partners banner and disclosure across all main pages.

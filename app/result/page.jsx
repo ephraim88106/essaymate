@@ -3,8 +3,8 @@
 // essay-input.jsx에서 router.push('/result', { formData }) 로 이동
 
 "use client";
-import { useEffect, useRef } from "react";
-import { useEssayGenerate } from "../hooks/useEssayGenerate";
+import { useState, useEffect, useRef } from "react";
+import { useEssayGenerate } from "../../hooks/useEssayGenerate";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Nunito:wght@400;600;700;800&family=Noto+Serif+KR:wght@400;600&display=swap');
@@ -289,10 +289,39 @@ export default function ResultPage({ formData, onBack }) {
             </div>
           )}
 
-          {/* Ad */}
-          <div className="ad-placeholder">
-            <div className="ad-label">Advertisement</div>
-            <div className="ad-box">Google AdSense 광고 영역 (728×90)</div>
+          {/* Coupa Partners Banner */}
+          <div style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            margin: "40px auto",
+            padding: "20px",
+            background: "white",
+            border: "2px solid #F0E6D3",
+            borderRadius: "24px",
+            maxWidth: "320px",
+            boxShadow: "4px 4px 0 #F0E6D3"
+          }}>
+            <iframe 
+              src="https://coupa.ng/cl73XG" 
+              width="120" 
+              height="240" 
+              frameBorder="0" 
+              scrolling="no" 
+              referrerPolicy="unsafe-url" 
+              browsingtopics
+            ></iframe>
+            <p style={{
+              fontSize: "11px",
+              color: "#888",
+              textAlign: "center",
+              marginTop: "12px",
+              lineHeight: "1.4",
+              wordBreak: "keep-all"
+            }}>
+              이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
+            </p>
           </div>
         </div>
       </div>

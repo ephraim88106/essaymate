@@ -522,6 +522,41 @@ export default function LandingPage({ onStart }) {
           </div>
         </section>
 
+        {/* Coupa Partners Banner */}
+        <div style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          margin: "40px auto",
+          padding: "20px",
+          background: "white",
+          border: "2px solid var(--border)",
+          borderRadius: "24px",
+          maxWidth: "320px",
+          boxShadow: "4px 4px 0 var(--border)"
+        }}>
+          <iframe 
+            src="https://coupa.ng/cl73XG" 
+            width="120" 
+            height="240" 
+            frameBorder="0" 
+            scrolling="no" 
+            referrerPolicy="unsafe-url" 
+            browsingtopics
+          ></iframe>
+          <p style={{
+            fontSize: "11px",
+            color: "#888",
+            textAlign: "center",
+            marginTop: "12px",
+            lineHeight: "1.4",
+            wordBreak: "keep-all"
+          }}>
+            이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
+          </p>
+        </div>
+
         {/* 푸터 */}
         <footer>
           <div className="footer-logo">✍️ EssayMate</div>
