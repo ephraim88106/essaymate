@@ -68,15 +68,15 @@ export function useEssayGenerate() {
           try {
             const parsed = JSON.parse(data);
 
-            // Anthropic SSE 이벤트 타입 처리
-            if (parsed.type === "content_block_delta") {
-              const text = parsed.delta?.text || "";
-              if (text) {
-                setEssay((prev) => prev + text);
-              }
+            // Gemini SSE 이벤트 처리
+            const text = parsed.candidates?.[0]?.content?.parts?.[0]?.text || "";
+            if (text) {
+              setEssay((prev) => prev + text);
             }
 
-            if (parsed.type === "message_stop") {
+            // 생성 완료 체크
+            const finishReason = parsed.candidates?.[0]?.finishReason;
+            if (finishReason && finishReason !== "FINISH_REASON_UNSPECIFIED") {
               setIsDone(true);
             }
           } catch {

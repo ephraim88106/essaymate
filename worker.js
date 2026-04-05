@@ -1,6 +1,6 @@
 // Cloudflare Workers - Essay Generation API
 // 배포: wrangler deploy
-// 환경변수: ANTHROPIC_API_KEY (wrangler secret put ANTHROPIC_API_KEY)
+// 환경변수: GEMINI_API_KEY (wrangler secret put GEMINI_API_KEY)
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*", // 배포 후 실제 도메인으로 변경
@@ -125,31 +125,31 @@ export default {
 
     const { topic, type, language, length, citation, field, extraNote } = body;
 
-    // Claude API 스트리밍 요청
-    const anthropicResponse = await fetch("https://api.anthropic.com/v1/messages", {
+    // Gemini API 스트리밍 요청
+    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:streamGenerateContent?alt=sse&key=${env.GEMINI_API_KEY}`;
+
+    const geminiResponse = await fetch(geminiUrl, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": env.ANTHROPIC_API_KEY,
-        "anthropic-version": "2023-06-01",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 4096,
-        stream: true,
-        system: buildSystemPrompt(type, language),
-        messages: [
+        system_instruction: {
+          parts: [{ text: buildSystemPrompt(type, language) }],
+        },
+        contents: [
           {
             role: "user",
-            content: buildUserPrompt({ topic, type, language, length, citation, field, extraNote }),
+            parts: [{ text: buildUserPrompt({ topic, type, language, length, citation, field, extraNote }) }],
           },
         ],
+        generationConfig: {
+          maxOutputTokens: 4096,
+        },
       }),
     });
 
-    if (!anthropicResponse.ok) {
-      const errText = await anthropicResponse.text();
-      console.error("Anthropic API error:", errText);
+    if (!geminiResponse.ok) {
+      const errText = await geminiResponse.text();
+      console.error("Gemini API error:", errText);
       return new Response(JSON.stringify({ error: "AI 생성 중 오류가 발생했습니다." }), {
         status: 502,
         headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
@@ -157,7 +157,7 @@ export default {
     }
 
     // SSE 스트림을 그대로 클라이언트에 전달
-    return new Response(anthropicResponse.body, {
+    return new Response(geminiResponse.body, {
       status: 200,
       headers: {
         ...CORS_HEADERS,
