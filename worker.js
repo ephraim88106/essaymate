@@ -22,6 +22,20 @@ function buildSystemPrompt(type, language) {
 - 마크다운 형식으로 출력`;
   }
 
+  if (type === "blog") {
+    return `당신은 전문 블로그 글 작성 AI입니다. 다음 규칙을 반드시 따르세요:
+- 독자의 관심을 끄는 매력적인 제목(# 제목)으로 시작
+- 도입부에서 독자의 공감을 이끌어내는 친근한 문체 사용
+- 본문은 ## 소제목으로 2~4개 섹션으로 구분
+- 핵심 내용은 **굵은 글씨**로 강조
+- 중요한 포인트는 번호 목록이나 불릿 목록으로 정리
+- 실용적인 팁, 예시, 경험담을 포함하여 가독성 높게 작성
+- 마지막에 독자 참여를 유도하는 마무리 문장 포함
+- SEO에 유리한 자연스러운 키워드 배치
+- 마크다운 형식으로 출력
+- 블로그 플랫폼에 바로 복사 붙여넣기 할 수 있도록 깔끔하게 작성`;
+  }
+
   if (type === "english") {
     return `You are an expert academic English essay writer.
 Follow these rules strictly:
@@ -66,7 +80,7 @@ function validateInput(body) {
   if (!topic || topic.trim().length < 3) {
     return "주제를 3자 이상 입력해주세요.";
   }
-  if (!["academic", "english"].includes(type)) {
+  if (!["academic", "english", "blog"].includes(type)) {
     return "올바른 에세이 유형을 선택해주세요.";
   }
   if (!["korean", "english"].includes(language)) {
@@ -126,7 +140,7 @@ export default {
     const { topic, type, language, length, citation, field, extraNote } = body;
 
     // Gemini API 스트리밍 요청
-    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:streamGenerateContent?alt=sse&key=${env.GEMINI_API_KEY}`;
+    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemma-4-26b-a4b-it:streamGenerateContent?alt=sse&key=${env.GEMINI_API_KEY}`;
 
     const geminiResponse = await fetch(geminiUrl, {
       method: "POST",
