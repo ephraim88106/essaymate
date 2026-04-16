@@ -51,7 +51,6 @@
         <a href="#features" class="footer-link" style="color:var(--text); font-size:14px;">기능</a>
         <a href="#how-it-works" class="footer-link" style="color:var(--text); font-size:14px;">사용법</a>
         <button class="nav-cta" onclick="showPage('form')">무료 시작하기 →</button>
-        <button class="nav-cta" style="background:transparent; border:1px solid var(--primary); color:var(--primary); font-size:12px; padding:6px 12px;" onclick="openApiKeyModal()">🔑 API 키</button>
     </div>
   </nav>
 
@@ -337,22 +336,6 @@
       <a href="terms.html" class="footer-link">이용약관</a>
     </div>
   </footer>
-
-  <!-- API 키 설정 모달 -->
-  <div id="api-key-modal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; display:none;">
-    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:white; border-radius:20px; padding:32px; max-width:420px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.2);">
-      <h3 style="margin:0 0 8px; font-size:20px;">🔑 API 키 설정</h3>
-      <p style="margin:0 0 16px; font-size:14px; color:#666;">Google AI Studio에서 발급받은 API 키를 입력하세요.<br>키는 브라우저에만 저장되며 외부로 전송되지 않습니다.</p>
-      <input id="api-key-input" type="password" placeholder="API 키를 입력하세요" style="width:100%; padding:12px; border:2px solid #e0e0e0; border-radius:10px; font-size:14px; box-sizing:border-box;">
-      <p style="margin:8px 0 16px; font-size:12px; color:#999;">
-        <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--primary);">Google AI Studio에서 API 키 발급받기 →</a>
-      </p>
-      <div style="display:flex; gap:8px; justify-content:flex-end;">
-        <button onclick="closeApiKeyModal()" style="padding:10px 20px; border:1px solid #ddd; border-radius:10px; background:white; cursor:pointer; font-size:14px;">취소</button>
-        <button onclick="saveApiKey()" style="padding:10px 20px; border:none; border-radius:10px; background:var(--primary); color:white; font-weight:700; cursor:pointer; font-size:14px;">저장</button>
-      </div>
-    </div>
-  </div>
 
   <script src="main.js"></script>
 </body>
